@@ -1,0 +1,38 @@
+.catppuccin {
+  --white: #f5e0dc;
+  --black: #181825;
+  --green: #cba6f7;
+  --red: #e78284;
+  --blue: #89b4fa;
+  --yellow: #f9e2af;
+  --orange: #fab387;
+  --purple: #b4befe;
+  --dgreen: #94e2d5;
+  --dblue: #74c7ec;
+}
+
+.nord {
+  --white: #d8dee9;
+  --black: #2b303d;
+  --green: #88c0d0;
+  --blue: #5e81ac;
+  --red: #bf616a;
+  --yellow: #ebcb8b;
+  --orange: #d08770;
+  --purple: #b4befe;
+  --dgreen: #a3be8c;
+  --dblue: #81a1c1;
+}
+
+.classic {
+  --white: White;
+  --black: Black;
+  --green: LimeGreen;
+  --red: Crimson;
+  --blue: DodgerBlue;
+  --yellow: Gold;
+  --orange: OrangeRed;
+  --purple: MediumSlateBlue;
+  --dgreen: MediumSeaGreen;
+  --dblue: DeepSkyBlue;
+}

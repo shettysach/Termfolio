@@ -1,0 +1,34 @@
+{
+  "github": "shettysach",
+
+  "about": {
+    "name": "Sachith C Shetty",
+    "intro": "Hello, I'm Sachith. I'm a CSE student, currently exploring AI/ML and memory safe languages like Rust. I am passionate about creating projects and learning how to code well.",
+
+    "interests": ["Artificial Intelligence", "Machine Learning", "LLMs", "GNU-Linux", "CLIs / TUIs", "Embedded Systems", "WASM"],
+
+    "langs": ["Rust", "Python", "C", "C++", "Bash", "Dart"],
+
+    "experience": [
+      {
+        "title": "Intern at Thingularity India",
+        "description": [ "Created a demo mobile app using Flutter(Dart, Android SDK)", "Helped in testing APIs and preparing test reports using Postman API.", "Learnt about embedded systems and programming, interacting with Bluetooth Low Energy (BLE) devices and Raspberry Pi (Python), and using REST API to get and post data to servers."]
+      }
+    ],
+
+    "education": [
+      {
+        "institute": "VIT, Vellore",
+        "course": "BTech, CSE Core",
+        "duration": "2021 - 2025"
+      }
+    ]
+  },
+
+  "links": {
+    "github": "shettysach",
+    "email": "ShettySachith47@gmail.com",
+    "linkedin": "in/sachith-shetty-3a165724b",
+    "twitter": null
+  }
+}

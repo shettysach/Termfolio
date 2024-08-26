@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Termfolio</title>
+    <link data-trunk rel="icon" href="./styles/favicon.ico" type="image/ico" />
+
+    <meta
+      http-equiv="Permissions-Policy"
+      content="interest-cohort=(), user-id=()"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link data-trunk rel="css" href="./styles/styles.css" />
+    <link data-trunk rel="css" href="./styles/themes.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div id="orientation-warning">
+      For the best experience, please use landscape mode or switch to a wider
+      screen.
+    </div>
+
+    <script>
+      function checkOrientation() {
+        const isPortrait = window.innerHeight > window.innerWidth;
+        const warning = document.getElementById("orientation-warning");
+        if (isPortrait) {
+          warning.style.display = "block";
+        } else {
+          warning.style.display = "none";
+        }
+      }
+
+      window.addEventListener("resize", checkOrientation);
+      window.addEventListener("load", checkOrientation);
+    </script>
+  </body>
+</html>
