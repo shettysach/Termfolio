@@ -22,7 +22,7 @@ pub fn format_about(about: About) -> String {
                 exp.description
                     .iter()
                     .map(|s| format!(r#"<span class="blu semibold">*</span> {}"#, s))
-                    .collect::<Vec<_>>()
+                    .collect::<Vec<String>>()
                     .join("\n"),
             )
         })
@@ -102,34 +102,23 @@ pub fn format_profile(profile: Profile) -> String {
     let created_on = &profile.info.created_at[..10];
 
     let text = format!(
-        r#"<a href="https://www.github.com/{}" style="text-decoration:none" target="_blank"><span class="grn semibold">{}</span><span class="grn semibold">@termfolio</span></a>
+        r#"<a href="https://www.github.com/{username}" style="text-decoration:none" target="_blank"><span class="grn semibold">{username}</span><span class="grn semibold">@termfolio</span></a>
 ----------------------
-<span class="grn semibold">Name:</span> {}
-<span class="grn semibold">Bio:</span> {}
-<span class="grn semibold">Repos:</span> {}
-<span class="grn semibold">Langs:</span> {}
-<span class="grn semibold">Stars:</span> {}
-<span class="grn semibold">Forks:</span> {}
-<span class="grn semibold">Company:</span> {}
-<span class="grn semibold">Location:</span> {}
-<span class="grn semibold">Followers:</span> {}
-<span class="grn semibold">Following:</span> {}
-<span class="grn semibold">Created on:</span> {}
+<span class="grn semibold">Name:</span> {name}
+<span class="grn semibold">Bio:</span> {bio}
+<span class="grn semibold">Repos:</span> {repos}
+<span class="grn semibold">Langs:</span> {langs}
+<span class="grn semibold">Stars:</span> {stars}
+<span class="grn semibold">Forks:</span> {forks}
+<span class="grn semibold">Company:</span> {company}
+<span class="grn semibold">Location:</span> {location}
+<span class="grn semibold">Followers:</span> {followers}
+<span class="grn semibold">Following:</span> {following}
+<span class="grn semibold">Created on:</span> {created_on}
 
 {BLOCKS}"#,
-        profile.username,
-        profile.username,
-        name,
-        bio,
-        repos,
-        format_langs(profile.langs),
-        stars,
-        forks,
-        company,
-        location,
-        followers,
-        following,
-        created_on
+        username = profile.username,
+        langs = format_langs(profile.langs),
     );
 
     format!(
