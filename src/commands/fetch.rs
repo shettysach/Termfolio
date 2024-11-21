@@ -108,7 +108,7 @@ async fn fetch_github() -> String {
 async fn fetch_repos() -> String {
     match read_config() {
         Some(config) => {
-            let repos_url = format!("https://pinned.berrysauce.me/dev/{}", config.github);
+            let repos_url = format!("https://pinned.berrysauce.dev/get/{}", config.github);
 
             match reqwest::get(&repos_url).await {
                 Ok(response) => {
