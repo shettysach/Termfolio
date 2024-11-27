@@ -155,7 +155,7 @@ pub fn format_repos(repos: &[Repository]) -> String {
             format!(
                 r#"<div class="row">
 <div class="rcols">{}</div>
-<div class="rcols" style="width: 45%;">{}</div>
+<div class="rcols">{}</div>
 </div>"#,
                 lang_icon(&repo.language),
                 text
