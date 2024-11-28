@@ -9,7 +9,7 @@ pub fn Banner() -> impl IntoView {
         <p class="inline">{get_prompt}</p>
         <p style="display:inline;padding:2px;">"help"</p>
         <pre>
-            <div class="output" inner_html={banner}></div>
+            <div class="output" inner_html=banner></div>
         </pre>
     }
 }

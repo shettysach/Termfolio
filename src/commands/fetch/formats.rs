@@ -82,7 +82,7 @@ pub fn format_about(about: About) -> String {
 
 
 <div class="row" style="display: flex; flex-direction: row; align-items: center; justify-content: center;"> 
-<div class="acols">{}</div>
+<div class="about">{}</div>
 </div>
 "#,
         text
@@ -123,8 +123,8 @@ pub fn format_profile(profile: Profile) -> String {
 
     format!(
         r#"<div class="row">
-<div class="gcols">{}</div>
-<div class="gcols">{}</div>
+<div class="ascii">{}</div>
+<div class="text">{}</div>
 </div>"#,
         NEOFETCH, text
     )
@@ -154,8 +154,8 @@ pub fn format_repos(repos: &[Repository]) -> String {
 
             format!(
                 r#"<div class="row">
-<div class="rcols">{}</div>
-<div class="rcols">{}</div>
+<div class="ascii">{}</div>
+<div class="text">{}</div>
 </div>"#,
                 lang_icon(&repo.language),
                 text

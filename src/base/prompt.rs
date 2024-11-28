@@ -73,17 +73,21 @@ pub fn Prompt(
     );
 
     view! {
-        <form
-            id="prompt-form"
-            on:submit=on_submit node_ref=form_element>
+        <form id="prompt-form" on:submit=on_submit node_ref=form_element>
             <p class="inline">{get_prompt()}</p>
             <input
-                id="prompt-form" autocomplete="off"
-                class="inp" type="text" maxlength=38 spellcheck="false"
-                value=out node_ref=input_element/>
+                id="prompt-form"
+                autocomplete="off"
+                class="inp"
+                type="text"
+                maxlength=38
+                spellcheck="false"
+                value=out
+                node_ref=input_element
+            />
         </form>
         <pre>
-            <div class="output" inner_html={out}></div>
+            <div class="output" inner_html=out></div>
         </pre>
     }
 }

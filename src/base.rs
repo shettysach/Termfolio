@@ -18,17 +18,13 @@ pub fn Base() -> impl IntoView {
         <div>
             <Banner/>
             <For
-                each = prompt_list
-                key = |&prompt| prompt
-                children = move |_| {
-                    view! {
-                        <Prompt
-                            submitter=set_prompts
-                            updater=set_history
-                            history=history/>
-                    }
+                each=prompt_list
+                key=|&prompt| prompt
+                children=move |_| {
+                    view! { <Prompt submitter=set_prompts updater=set_history history=history/> }
                 }
             />
+
         </div>
     }
 }

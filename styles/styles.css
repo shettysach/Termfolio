@@ -68,9 +68,9 @@ form {
   margin-bottom: 22px;
 }
 
-.acols,
-.gcols,
-.rcols {
+.about,
+.ascii,
+.text {
   flex-direction: row;
   box-sizing: border-box;
   float: left;
@@ -78,7 +78,7 @@ form {
 
 /* About */
 
-.acols {
+.about {
   flex: 0 0 calc(60%);
   outline: 3.5px solid var(--green);
   outline-offset: 25px;
@@ -86,14 +86,14 @@ form {
 
 /* Github fetch */
 
-.gcols {
+.ascii {
   flex: 0 0 calc(50% - 15px);
   margin: 20px;
 }
 
 /* Repos fetch */
 
-.rcols {
+.text {
   flex: 0 0 calc(50% - 35px);
   margin: 30px;
   max-width: 30%;
