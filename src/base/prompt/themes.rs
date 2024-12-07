@@ -5,12 +5,12 @@ use leptos_use::{
 };
 
 // Last theme will be default
-static THEMES: [&str; 4] = ["catppuccin", "nord", "classic", "tokyo-night"];
+static THEMES: [&str; 4] = ["catppuccin", "nord", "default", "tokyonight"];
 
 pub fn theme_changer() -> (Signal<ColorMode>, impl Fn() + Clone) {
     let UseColorModeReturn { mode, set_mode, .. } = use_color_mode_with_options(
         UseColorModeOptions::default()
-            .custom_modes(THEMES.iter().map(|&s| s.to_string()).collect())
+            .custom_modes(THEMES.into_iter().map(String::from).collect())
             .initial_value(ColorMode::from(THEMES.last().unwrap().to_string())),
     );
 

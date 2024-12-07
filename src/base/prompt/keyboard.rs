@@ -2,7 +2,7 @@ use crate::commands::autocomplete;
 use leptos::{
     ev::{keydown, KeyboardEvent},
     html::Input,
-    NodeRef, ReadSignal, SignalGetUntracked, SignalUpdate, WriteSignal,
+    NodeRef, ReadSignal, SignalGet, SignalUpdate, WriteSignal,
 };
 use leptos_use::use_event_listener;
 use std::{cmp::Ordering, collections::VecDeque};
@@ -15,9 +15,9 @@ pub fn keyboard_commands(
     submitter: WriteSignal<u8>,
 ) {
     let _ = use_event_listener(input_element, keydown, move |ev: KeyboardEvent| {
-        let index = history_index.get_untracked().into();
-        let hist = history.get_untracked();
-        let inp = input_element.get_untracked().unwrap();
+        let hist = history.get();
+        let index = history_index.get().into();
+        let inp = input_element.get().unwrap();
 
         match &ev.key()[..] {
             //Previous command in history
@@ -25,18 +25,23 @@ pub fn keyboard_commands(
                 ev.prevent_default();
                 if index < hist.len() {
                     inp.set_value(&hist[index]);
-                    set_history_index.update(|history_index| *history_index += 1);
+                    set_history_index.update(move |history_index| *history_index += 1);
                 }
             }
+
             //Next command in history
-            "ArrowDown" => {
-                match index.cmp(&1) {
-                    Ordering::Greater => inp.set_value(&hist[index - 2]),
-                    Ordering::Equal => inp.set_value(""),
-                    Ordering::Less => (), // No action needed if index < 1
+            "ArrowDown" => match index.cmp(&1) {
+                Ordering::Greater => {
+                    inp.set_value(&hist[index - 2]);
+                    set_history_index.update(move |history_index| *history_index -= 1);
                 }
-                set_history_index.update(|history_index| *history_index -= 1);
-            }
+                Ordering::Equal => {
+                    inp.set_value("");
+                    set_history_index.update(move |history_index| *history_index -= 1);
+                }
+                Ordering::Less => (),
+            },
+
             //Autocomplete
             "Tab" => {
                 ev.prevent_default();
@@ -45,15 +50,23 @@ pub fn keyboard_commands(
             _ => {}
         }
 
-        //Clear
-        if (ev.ctrl_key() || ev.meta_key()) && (ev.key() == "l" || ev.key() == "L") {
-            ev.prevent_default();
-            submitter.update(|prompts| {
-                *prompts = 0;
-            });
-            submitter.update(|prompts| {
-                *prompts += 1;
-            });
+        //Ctrl
+        if ev.ctrl_key() || ev.meta_key() {
+            // Clear
+            match &ev.key()[..] {
+                "l" | "L" => {
+                    ev.prevent_default();
+                    submitter.update(|prompts| {
+                        *prompts = 0;
+                    });
+                    submitter.update(|prompts| {
+                        *prompts += 1;
+                    });
+                }
+                // Can add Ctrl + P / N for history,
+                // but will interfere with new window shortcut
+                _ => {}
+            }
         }
     });
 }

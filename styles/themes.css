@@ -24,11 +24,11 @@
   --dblue: #81a1c1;
 }
 
-.classic {
+.default {
   --white: White;
   --black: Black;
   --green: LimeGreen;
-  --red: Crimson;
+  --red: Red;
   --blue: DodgerBlue;
   --yellow: Gold;
   --orange: OrangeRed;

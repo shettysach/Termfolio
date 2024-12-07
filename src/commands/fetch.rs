@@ -21,21 +21,21 @@ static CONTACTS: OnceLock<String> = OnceLock::new();
 // Once Functions
 
 fn read_config() -> Option<Config> {
-    CONFIG.get_or_init(|| match serde_json::from_str::<Config>(JSON) {
-        Ok(config) => Some(config),
-        Err(_) => None,
-    });
-
-    CONFIG.get().cloned()?
+    CONFIG
+        .get_or_init(|| match serde_json::from_str::<Config>(JSON) {
+            Ok(config) => Some(config),
+            Err(_) => None,
+        })
+        .clone()
 }
 
 pub fn get_prompt() -> String {
-    PROMPT.get_or_init(|| match read_config() {
-        Some(config) => format!("{}@termfolio~$ ", config.github),
-        _ => String::from("user@termfolio~$ "),
-    });
-
-    PROMPT.get().cloned().unwrap()
+    PROMPT
+        .get_or_init(|| match read_config() {
+            Some(config) => format!("{}@termfolio~$ ", config.github),
+            _ => String::from("user@termfolio~$ "),
+        })
+        .clone()
 }
 
 pub fn get_about() -> String {
