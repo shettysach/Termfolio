@@ -11,7 +11,6 @@ pub struct Config {
 pub struct About {
     pub name: String,
     pub intro: String,
-    pub interests: Vec<String>,
     pub langs: Vec<String>,
     pub experience: Vec<Experience>,
     pub education: Vec<Education>,

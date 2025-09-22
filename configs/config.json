@@ -3,11 +3,9 @@
 
   "about": {
     "name": "Sachith C Shetty",
-    "intro": "Hello, I'm Sachith. I'm a CSE student, currently exploring AI/ML and memory safe languages like Rust. I am passionate about creating projects and learning how to code well.",
+    "intro": "Hi, I'm Sachith, a Master's student in Computer Science at USC, with interests in systems programming, deep learning compilers and programming language compilers. I am also interested in learning about information theory, deep learning and functional programming. I currently use Rust, Python, C++ and C.",
 
-    "interests": ["Artificial Intelligence", "Machine Learning", "LLMs", "GNU-Linux", "CLIs / TUIs", "Embedded Systems", "WASM"],
-
-    "langs": ["Rust", "Python", "C", "C++", "Bash", "Dart"],
+    "langs": ["Rust", "Python", "C++", "C", "Haskell"],
 
     "experience": [
       {
@@ -15,6 +13,13 @@
         "description": [ "Created a demo mobile app using Flutter(Dart, Android SDK)", "Helped in testing APIs and preparing test reports using Postman API.", "Learnt about embedded systems and programming, interacting with Bluetooth Low Energy (BLE) devices and Raspberry Pi (Python), and using REST API to get and post data to servers."]
       }
     ],
+
+    "education": [
+      {
+        "institute": "USC, LA",
+        "course": "MS, CS",
+        "duration": "2025 - 2027"
+      }
 
     "education": [
       {

@@ -48,10 +48,6 @@ pub fn format_about(about: About) -> String {
         r#"<center class="grn semibold">{}</center>
 {}
 
-<u class="rd semibold">Interests</u>
-
-{}
-
 <u class="rd semibold">Languages</u>
 
 {}
@@ -66,12 +62,6 @@ pub fn format_about(about: About) -> String {
 "#,
         about.name.to_uppercase(),
         about.intro,
-        about
-            .interests
-            .iter()
-            .map(|s| format!(r#"<span class="rd semibold">*</span> {}"#, s))
-            .collect::<Vec<_>>()
-            .join("\n"),
         format_langs(about.langs),
         exp_string,
         edu_string

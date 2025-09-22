@@ -22,24 +22,5 @@
   </head>
 
   <body>
-    <div id="orientation-warning">
-      For the best experience, please use landscape mode or switch to a wider
-      screen.
-    </div>
-
-    <script>
-      function checkOrientation() {
-        const isPortrait = window.innerHeight > window.innerWidth;
-        const warning = document.getElementById("orientation-warning");
-        if (isPortrait) {
-          warning.style.display = "block";
-        } else {
-          warning.style.display = "none";
-        }
-      }
-
-      window.addEventListener("resize", checkOrientation);
-      window.addEventListener("load", checkOrientation);
-    </script>
   </body>
 </html>

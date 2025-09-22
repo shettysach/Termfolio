@@ -16,7 +16,10 @@ Hello, welcome to <u class="blu semibold">Termfolio</u> [WIP]. Type one of these
   <span class="rd semibold">clear</span> - Clear screen
 
 You can use <i>arrow keys</i> to scroll through history,
-and also use <i>Ctrl+L</i> to clear the screen"#;
+and also use <i>Ctrl+L</i> to clear the screen
+
+If you prefer a static site, visit - <a href="https://shettysach.github.io" target="_blank" class="blu semibold">shettysach.github.io</a>
+"#;
 
 pub const CREDITS: &str = r#"<span class="grn"> _____________  __  ___________  __   ________
 /_  __/ __/ _ \/  |/  / __/ __ \/ /  /  _/ __ \
