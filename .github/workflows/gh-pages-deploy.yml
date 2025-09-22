@@ -41,7 +41,6 @@ jobs:
           cargo fmt --all -- --check
           cargo clippy --all-targets --all-features -- -D warnings
 
-      # If using tailwind, build your CSS before trunk build
       # - name: Build Tailwind CSS
       #   run: |
       #     npm ci
@@ -53,78 +52,42 @@ jobs:
           sudo mv trunk /usr/local/bin/trunk
 
       - name: Build with Trunk
-        # Leading slash in --public-url ensures paths like /REPO_NAME/... for Pages subpath
         run: trunk build --release --public-url "/${GITHUB_REPOSITORY#*/}"
 
-      # Inspect dist before fixing links (helpful diagnostics)
-      - name: Inspect dist (pre-fix)
-        run: |
-          echo "Dist size:"
-          du -sh dist || true
-          echo "Symlinks in dist:"
-          find dist -type l -printf "symlink: %p -> %l\n" || true
-          echo "Top-level contents:"
-          ls -lah dist || true
-
-      # De-symlink: replace any symlinks in dist with real files/dirs
-      - name: De-symlink dist (dereference links)
-        shell: bash
+      # Make a Pages-safe mirror: dereference symlinks/hardlinks and normalize perms
+      - name: Make Pages-safe copy (no links, normalized perms)
         run: |
           set -euo pipefail
-          # Find symlinks and replace them with copies of their targets
-          mapfile -d '' links < <(find dist -type l -print0 || true)
-          if (( ${#links[@]} )); then
-            echo "Found ${#links[@]} symlink(s); dereferencing..."
-            for link in "${links[@]}"; do
-              target="$(readlink -f "$link")"
-              rm -f -- "$link"
-              if [ -d "$target" ]; then
-                mkdir -p -- "$link"
-                rsync -a --copy-links "$target"/ "$link"/
-              else
-                mkdir -p -- "$(dirname "$link")"
-                rsync -a --copy-links "$target" "$link"
-              fi
-            done
-          else
-            echo "No symlinks found in dist."
-          fi
+          rm -rf dist_pages
+          # -L follows symlinks (copies the target content)
+          # No -H => hard links are not preserved (files are duplicated)
+          rsync -aL --no-owner --no-group --chmod=D755,F644 dist/ dist_pages/
+          # Ensure everything is world-readable and dirs traversable
+          chmod -R a+rX dist_pages
 
-      # Verify no symlinks remain and re-check size
-      - name: Inspect dist (post-fix)
+      # Optional diagnostics
+      - name: Inspect dist_pages
         run: |
-          echo "Remaining symlinks (should be none):"
-          find dist -type l -printf "symlink: %p -> %l\n" || true
-          echo "Dist size after fix:"
-          du -sh dist || true
+          echo "Size:"
+          du -sh dist_pages || true
+          echo "Symlinks (should be none):"
+          find dist_pages -type l -printf "symlink: %p -> %l\n" || true
+          echo "Hardlinks (should be none):"
+          find dist_pages -type f -links +1 -printf "hardlink: %p (nlink=%n)\n" || true
+          echo "Files not world-readable (should be none):"
+          find dist_pages -type f ! -perm -a+r -printf "%m %p\n" || true
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
         with:
           enablement: true
 
-      # Option A: Use generic artifacts v4 (recommended if you also need to re-use artifacts across jobs)
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
+      # Prefer the Pages uploader; it packages content the way deploy-pages expects
+      - name: Upload artifact (Pages)
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: pages-dist
-          path: dist
-          if-no-files-found: error
-          retention-days: 7
-          compression-level: 6
+          path: dist_pages
 
-      - name: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages 🚀
         id: deployment
         uses: actions/deploy-pages@v4
-        with:
-          artifact_name: pages-dist
-
-      # Option B (current approach): keep Pages artifact action
-      # - name: Upload artifact (Pages)
-      #   uses: actions/upload-pages-artifact@v2
-      #   with:
-      #     path: './dist'
-      #
-      # - name: Deploy to GitHub Pages 🚀
-      #   id: deployment
-      #   uses: actions/deploy-pages@v4
