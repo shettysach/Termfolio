@@ -16,15 +16,13 @@
 
     "education": [
       {
-        "institute": "USC, LA",
-        "course": "MS, CS",
+        "institute": "USC, Los Angeles",
+        "course": "MSCS",
         "duration": "2025 - 2027"
-      }
-
-    "education": [
+      },
       {
         "institute": "VIT, Vellore",
-        "course": "BTech, CSE Core",
+        "course": "B.Tech CSE",
         "duration": "2021 - 2025"
       }
     ]
